@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, flash, jsonify, make_response
+from flask import Flask, render_template, request, flash
 
 import redis
 
 app = Flask(__name__)
+app.secret_key = 'super secret key'
 
 
 r = redis.Redis('192.168.99.100')
@@ -17,10 +18,10 @@ def home():
         req = request.form
         name = req["full_name"]
         post = req["data"]
-        print(name, post)
+        # print(name, post)
 
         last = r.get("last_id")
-        print("la", last)
+        # print("last_id", last)
         if last is None:
             last_id = 1
         else:
