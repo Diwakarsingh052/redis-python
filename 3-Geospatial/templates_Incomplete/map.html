@@ -1,0 +1,58 @@
+<html>
+
+<head>
+  <title>Add Map</title>
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style type="text/css">
+   
+    .form-details {
+      width: 100%;
+      max-width: 530px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    body {
+      min-height: 75rem;
+      margin: 0;
+    }
+
+    .textbox {
+      font-weight: bold;
+    }
+  </style>
+  
+</head>
+
+<body>
+  <br>
+  <center>
+
+    <h1> All RealRedis Users </h1>
+    <br>
+    
+    
+
+    <h3>Enter your Details to add a marker</h3>
+
+
+    <form class="form-details" action="/add-marker" method="POST">
+      <br>
+      <label for="name" class="textbox">Name</label>
+      <input type="text" name="lname"><br><br>
+      <label for="latitude" class="textbox">Latitude</label>
+      <input type="number" step=any name="latitude"><br><br>
+      <label for="longitude" class="textbox">Longitude</label>
+      <input type="number" step=any name="longitude"><br><br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </form>
+    
+    
+
+  </center>
+  
+</body>
+
+</html>

@@ -1,0 +1,110 @@
+<html>
+
+<head>
+  <title>Add Map</title>
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <style type="text/css">
+    /* Set the size of the div element that contains the map */
+    #map {
+      height: 400px;
+      /* The height is 400 pixels */
+      width: 50%;
+      /* The width is the width of the web page */
+    }
+    .form-details {
+      width: 100%;
+      max-width: 530px;
+      padding: 15px;
+      margin: 0 auto;
+    }
+    body {
+      min-height: 75rem;
+      margin: 0;
+    }
+
+    .textbox {
+      font-weight: bold;
+    }
+  </style>
+  <script>
+ 
+
+    async function loadUsers() {
+      return (await fetch("/data")).json();
+    }
+
+    
+
+    async function initMap() {
+
+
+      let geoPoints = await loadUsers();
+
+      
+
+
+      let loc_name = Object.keys(geoPoints)
+
+      
+      let name =  loc_name[loc_name.length - 1]
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 2,
+        center: geoPoints[name],
+      });
+
+
+      for (loc_name in geoPoints) {
+        
+
+        const coord = geoPoints[loc_name];
+        
+
+        const marker = new google.maps.Marker({
+          position: coord,
+          map: map,
+
+        });
+
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+  <br>
+  <center>
+
+    <h1> All RealRedis Users </h1>
+    <br>
+    
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <br>
+
+    <h3>Enter your Details to add a marker</h3>
+
+
+    <form class="form-details" action="/add-marker" method="POST">
+      <br>
+      <label for="name" class="textbox">Name</label>
+      <input type="text" name="lname"><br><br>
+      <label for="latitude" class="textbox">Latitude</label>
+      <input type="number" step=any name="latitude"><br><br>
+      <label for="longitude" class="textbox">Longitude</label>
+      <input type="number" step=any name="longitude"><br><br>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+    </form>
+    
+    
+
+  </center>
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script src="https://maps.googleapis.com/maps/api/js?callback=initMap&libraries=&v=weekly" async></script>
+</body>
+
+</html>
