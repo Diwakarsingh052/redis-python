@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+.ulist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+.list {
+  float: left;
+}
+
+.list a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.list a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+.data {
+  font-size:x-large;
+}
+
+</style>
+</head>
+<body>
+
+<ul class="ulist">
+  <li class="list"><a href="/">Home</a></li>
+  <li class="list"><a class="active" href="/all">All Posts</a></li>
+  <li class="list"><a href="/latest">Latest Posts</a></li>
+</ul>
+
+  <h1 align="center"> All Awesome Posts</h1>
+  
+  <h4 style="color:red" align="center">Check the latest post to see recent 3 posts</h4>
+  <hr>
+  <br>
+  <ul>
+
+    {% for k,v in posts.items() %}
+    <li class = "data">{{ k }} posted {{v}}</li>
+    {% endfor %}
+  </ul>
+
+</body>
+</html>
