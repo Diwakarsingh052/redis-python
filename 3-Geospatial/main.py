@@ -33,6 +33,11 @@ def data():
     return json.dumps(cord)
 
 
+@app.route("/last")
+def last_loc():
+    return r.get("last_loc_name").decode("utf-8")
+    
+
 @app.route("/add-marker", methods=["POST"])
 def add_marker():
     req = request.form

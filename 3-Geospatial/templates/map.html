@@ -37,6 +37,9 @@
       return (await fetch("/data")).json();
     }
 
+    async function lastLocation() {
+      return (await fetch("/last")).text();
+    }
     // Initialize and add the map
     async function initMap() {
 
@@ -46,7 +49,7 @@
       let locName = Object.keys(geoPoints);
       console.log("Key Values", locName);
 
-      let name = locName[locName.length - 1];
+      let name = await lastLocation();
       console.log("latest loc", name);
 
 
