@@ -16,7 +16,8 @@ def home():
 def data():
     loc_name = r.get("last_loc_name")
     if loc_name is None:
-        r.geoadd("points", '-104.985784', '39.728206', "parking")
+        r.geoadd("points", [-104.985784, 39.728206, "parking"]) // change in redis python api
+        #r.geoadd("points", '-104.985784', '39.728206', "parking")
         loc_name = "parking"
     all_loc = r.georadiusbymember(name='points', member=loc_name, radius=40000, unit='mi', withcoord=True)
     # print(all_loc)
