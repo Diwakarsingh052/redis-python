@@ -16,8 +16,8 @@ def home():
 def data():
     loc_name = r.get("last_loc_name")
     if loc_name is None:
-        r.geoadd("points", [-104.985784, 39.728206, "parking"]) // change in redis python api
-        #r.geoadd("points", '-104.985784', '39.728206', "parking")
+        r.geoadd("points", [-104.985784, 39.728206, "parking"])  # change in redis python api
+        # r.geoadd("points", '-104.985784', '39.728206', "parking") # deprecated way
         loc_name = "parking"
     all_loc = r.georadiusbymember(name='points', member=loc_name, radius=40000, unit='mi', withcoord=True)
     # print(all_loc)
@@ -37,7 +37,7 @@ def data():
 @app.route("/last")
 def last_loc():
     return r.get("last_loc_name").decode("utf-8")
-    
+
 
 @app.route("/add-marker", methods=["POST"])
 def add_marker():
@@ -48,7 +48,8 @@ def add_marker():
 
     print(location, latitude, location)
 
-    r.geoadd("points", longitude, latitude, location)
+    # r.geoadd("points", longitude, latitude, location)  # don't use this line in the code as shown in the video
+    r.geoadd("points", [longitude, latitude, location])  # redis-py api update so use this one
     r.set("last_loc_name", location)
 
     return redirect("/")
